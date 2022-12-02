@@ -1,0 +1,76 @@
+.userContainer {
+  display: grid;
+  grid-template-columns: 25rem 1fr;
+  margin-top: 4rem;
+}
+
+.userStatus {
+  max-width: 100%;
+}
+
+.userImg {
+  margin-left: 75px;
+  align-items: center;
+  border-radius: 100%;
+  overflow: hidden;
+  height: 150px;
+  width: 150px;
+  background-color: #333;
+  /*border: 1px solid #333;
+  box-shadow: inset 1px ;*/
+}
+
+.userImg img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.userInfoContainer h1 {
+  margin-bottom: 0.8rem;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.userInfo p {
+  border: 1px solid #eee;
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.8rem;
+  border-radius: 0.4rem;
+  background: #eee;
+}
+
+.userInfo div {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.buttons button {
+  text-decoration: none;
+  width: 250px;
+  color: #006be8;
+  border: 2px solid #006be8;
+  border-radius: 0.4rem;
+  padding: 0.5rem 2rem;
+  background-color: #fff;
+  margin-left: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out 0s;
+  font-size: 0.8rem;
+}
+
+.buttons button:hover {
+  background-color: #006be8;
+  color: #fff;
+}

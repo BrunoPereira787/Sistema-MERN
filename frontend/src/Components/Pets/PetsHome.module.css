@@ -1,0 +1,72 @@
+.petContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin: 4rem 0;
+}
+
+.petCard {
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f8f8;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.petImage {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  height: 15rem;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.petInfo {
+  margin: 0.5rem;
+}
+
+.petInfo p {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.petInfo span {
+  font-weight: normal;
+}
+
+.petAdopter {
+  position: relative;
+  margin: 0 auto;
+  margin-bottom: 0.8em;
+}
+
+.petAdopter a {
+  font-size: 1.125rem;
+  color: #2d1fed;
+}
+
+.petAdopter a::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 2px;
+  bottom: -3px;
+  left: 0;
+  background-color: #2d1fed;
+  visibility: hidden;
+  transform: scaleX(0);
+  transition: all 0.2s ease-in-out 0s;
+}
+
+.petAdopter a:hover::before {
+  visibility: visible;
+  transform: scaleX(1);
+}
+
+.petAdopter p {
+  font-size: 1.125rem;
+  color: #21832b;
+}

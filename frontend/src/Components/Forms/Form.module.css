@@ -1,0 +1,27 @@
+.formContainer {
+  max-width: 50rem;
+  margin: 4rem auto 4rem auto;
+  padding: 1rem;
+  background-color: #f8f8f8;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+.formPreview {
+  text-align: center;
+  border-radius: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+  height: 200px;
+  width: 200px;
+  background-color: #333;
+}
+
+.formPreview img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.file {
+  margin-bottom: 1rem;
+}
