@@ -26,7 +26,26 @@ const UserSchema = new mongoose.Schema(
     image: {
       type: String,
     },
-    dataLocalization: Object,
+    cep: {
+      type: String,
+      required: true,
+    },
+    state: {
+      type: String,
+      required: true,
+    },
+    city: {
+      type: String,
+      required: true,
+    },
+    district: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

@@ -11,9 +11,9 @@ router.post("/login", UserController.login);
 router.get("/all", UserController.getAllUsers);
 router.get("/user", UserController.getUserByToken);
 router.get("/:id", verifyToken, UserController.getUserById);
-router.patch(
+router.put(
   "/edit",
-  imageUpload.single("image"),
+  //imageUpload.single("image"),
   verifyToken,
   UserController.editUser
 );

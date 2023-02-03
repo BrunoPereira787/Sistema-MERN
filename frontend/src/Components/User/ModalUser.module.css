@@ -1,0 +1,23 @@
+.modal {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0px;
+  left: 0px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.modalUser {
+  border-radius: 2rem;
+  margin: 1.2rem;
+  padding: 1.25rem;
+  width: 50rem;
+  height: 36rem;
+  border-radius: 0.2rem;
+  background: #fff;
+  overflow: auto;
+}

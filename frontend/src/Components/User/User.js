@@ -2,11 +2,13 @@ import React from "react";
 import UseFetch from "../../Hooks/UseFetch";
 import { UserContext } from "../../UserContext";
 import Loading from "../Helper/Loading";
+import ModalUser from "./ModalUser";
 import styles from "./User.module.css";
 
 const User = () => {
   const { data, loading, request } = UseFetch();
   const { userLogout } = React.useContext(UserContext);
+  const [userModal, setUserModal] = React.useState(null);
 
   React.useEffect(() => {
     const loadApi = async () => {
@@ -41,6 +43,9 @@ const User = () => {
   if (data)
     return (
       <section className={`${styles.userContainer} container`}>
+        {userModal && (
+          <ModalUser user={userModal} setUserModal={setUserModal} />
+        )}
         <div className={styles.userStatus}>
           <div className={styles.userImg}>
             {data.img ? (
@@ -50,7 +55,7 @@ const User = () => {
             )}
           </div>
           <div className={styles.buttons}>
-            <button>Editar Perfil</button>
+            <button onClick={() => setUserModal(data)}>Editar Perfil</button>
             <button onClick={handleDelete}>Deletar Perfil</button>
           </div>
         </div>
@@ -60,12 +65,12 @@ const User = () => {
             <p>{data.name}</p>
             <p>{data.email}</p>
             <div>
-              <p>{data.dataLocalization.cep}</p>
-              <p>{data.dataLocalization.state}</p>
+              <p>{data.cep}</p>
+              <p>{data.state}</p>
             </div>
             <div>
-              <p>{data.dataLocalization.city}</p>
-              <p>{data.dataLocalization.district}</p>
+              <p>{data.city}</p>
+              <p>{data.district}</p>
             </div>
           </div>
         </div>

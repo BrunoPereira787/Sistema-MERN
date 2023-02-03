@@ -38,8 +38,7 @@ class UserController {
       !confirmpassword ||
       !phone ||
       !cell ||
-      !cep ||
-      !state
+      !cep
     ) {
       return res
         .status(422)
@@ -69,13 +68,11 @@ class UserController {
       password: passwordHash,
       phone: validate(phone),
       cell: validate(cell),
-      dataLocalization: {
-        cep,
-        state,
-        city,
-        district,
-        address,
-      },
+      cep,
+      state,
+      city,
+      district,
+      address,
     };
 
     try {
@@ -167,12 +164,12 @@ class UserController {
     const token = getToken(req);
     let user = await getUserByToken(token);
 
-    const { name, email, password, confirmpassword, phone, cell, state } =
+    const { name, email, phone, cell, cep, state, city, district, address } =
       req.body;
 
-    if (req.file) {
+    /*if (req.file) {
       user.image = req.file.filename;
-    }
+    }*/
 
     if (!name) {
       return res.status(422).json({ message: "Nome é obrigatorio" });
@@ -196,20 +193,15 @@ class UserController {
     }
     user.cell = cell;
 
-    if (!state) {
-      return res.status(422).json({ message: "o estado é obrigatorio" });
+    if (!cep) {
+      return res.status(422).json({ message: "o Cep é obrigatorio" });
     }
+
+    user.cep = cep;
     user.state = state;
-
-    if (password !== confirmpassword) {
-      return res.status(422).json({ message: "As senhas não conferem" });
-    } else if (password == confirmpassword && password != null) {
-      const salt = await bcrypt.genSalt(12);
-      const reqPassword = req.body.password;
-      const passwordHash = await bcrypt.hash(reqPassword, salt);
-
-      user.password = passwordHash;
-    }
+    user.city = city;
+    user.district = district;
+    user.address = address;
 
     try {
       await User.findByIdAndUpdate(user._id, { $set: user });
