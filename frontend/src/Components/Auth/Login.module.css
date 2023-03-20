@@ -25,3 +25,17 @@
 .form p {
   margin-top: 1rem;
 }
+
+@media (max-width: 650px) {
+  .login {
+    grid-template-columns: 1fr;
+  }
+
+  .login::before {
+    display: none;
+  }
+
+  .form {
+    padding: 4rem 1rem;
+  }
+}

@@ -6,7 +6,7 @@
 
 .registerContainer {
   box-shadow: 0pc 2px 5px rgba(0, 0, 0, 0.4);
-  padding: 1em 3rem;
+  padding: 1em 2rem;
   border-radius: 10px;
 }
 
@@ -15,8 +15,7 @@
   grid-template-columns: 1fr 1fr;
 }
 
-.registerPessoais,
-.registerResidenciais {
+.registerPessoais {
   margin-right: 1.5rem;
 }
 
@@ -27,9 +26,24 @@
 
 .registerphones {
   display: flex;
+  gap: 1rem;
   justify-content: space-between;
 }
 
 .register p {
   margin-top: 1rem;
+}
+
+@media (max-width: 720px) {
+  .registerForm {
+    grid-template-columns: 1fr;
+  }
+
+  .registerPessoais {
+    margin-right: 0;
+  }
+
+  .registerphones {
+    display: block;
+  }
 }

@@ -59,38 +59,45 @@ const MyPets = () => {
       <section className={`${styles.pet} container`}>
         {data &&
           data.pets.map((pet) => (
-            <div key={pet._id} className={styles.petContainer}>
-              <div className={styles.petInfo}>
-                <img
-                  src={`http://localhost:5000/images/pets/${pet.images[0]}`}
-                  alt=""
-                />
-                <p>
-                  <span>{pet.name}</span>
-                  <span>{pet.age} anos</span>
-                  <span>{pet.weight} kg</span>
-                </p>
+            <>
+              <div key={pet._id} className={styles.petContainer}>
+                <div className={styles.petInfo}>
+                  <img
+                    src={`http://localhost:5000/images/pets/${pet.images[0]}`}
+                    alt=""
+                  />
+                  <p>
+                    <span>{pet.name}</span>
+                    <span>{pet.age} anos</span>
+                    <span>{pet.weight} kg</span>
+                  </p>
+                </div>
+                <div className={styles.actions}>
+                  {pet.available ? (
+                    <>
+                      <button
+                        onClick={() => concludesAdoptions(pet._id)}
+                        className={styles.conclude_btn}
+                      >
+                        Concluir adoção
+                      </button>
+                      <button onClick={() => removePet(pet._id)}>
+                        Excluir
+                      </button>
+                      <Link to={`/pet/${pet._id}`}>Editar</Link>
+                    </>
+                  ) : (
+                    <>
+                      <button onClick={() => removePet(pet._id)}>
+                        Excluir
+                      </button>
+                      <p>Pet ja adotado</p>
+                    </>
+                  )}
+                </div>
               </div>
-              <div className={styles.actions}>
-                {pet.available ? (
-                  <>
-                    <button
-                      onClick={() => concludesAdoptions(pet._id)}
-                      className={styles.conclude_btn}
-                    >
-                      Concluir adoção
-                    </button>
-                    <button onClick={() => removePet(pet._id)}>Excluir</button>
-                    <Link to={`/pet/${pet._id}`}>Editar</Link>
-                  </>
-                ) : (
-                  <>
-                    <button onClick={() => removePet(pet._id)}>Excluir</button>
-                    <p>Pet ja adotado</p>
-                  </>
-                )}
-              </div>
-            </div>
+              <div className={styles.line}></div>
+            </>
           ))}
         {data.pets.length === 0 && <p>Nõ há pets cadastrados</p>}
       </section>

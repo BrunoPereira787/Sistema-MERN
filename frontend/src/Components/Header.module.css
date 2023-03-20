@@ -23,7 +23,9 @@
 }
 
 .userHeaderContainer {
-  padding: 0.5rem 0rem;
+  position: relative;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .userHeaderContainer h1 {
@@ -68,4 +70,107 @@
 .headerNav ul li a:hover::before {
   visibility: visible;
   transform: scaleX(1);
+}
+
+.mobileButton {
+  background-color: #e9e9e9;
+  border-radius: 0.2rem;
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  transition: 0.1s;
+  cursor: pointer;
+}
+
+.mobileButton::after {
+  content: "";
+  display: block;
+  width: 1.2rem;
+  height: 2px;
+  background-color: currentColor;
+  border-radius: 2px;
+  box-shadow: 0 6px currentColor, 0 -6px currentColor;
+  transition: 0.2s;
+}
+
+.mobileButton:focus,
+.mobileButton:hover,
+.mobileButtonActive {
+  outline: none;
+  background-color: white;
+  box-shadow: 0 0 0 3px #adf;
+  border-color: #018;
+  color: #018;
+}
+
+.mobileButtonActive::after {
+  transform: rotate(90deg);
+  width: 4px;
+  height: 4px;
+  box-shadow: 0 8px currentColor, 0 -8px currentColor;
+}
+
+.navMobile {
+  position: absolute;
+  display: block;
+  top: 70px;
+  right: 0;
+  padding: 0 1rem;
+  background-color: white;
+  color: #000;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 0.2rem;
+  transform: translateX(-10px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.navMobile ul li a {
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+
+.navMobile a {
+  display: flex;
+  align-items: center;
+  background: none;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #eee;
+  padding: 0.5rem 0;
+  cursor: pointer;
+}
+
+.navMobile a:hover {
+  color: #006be8;
+}
+
+.navMobileActive {
+  transition: 0.3s;
+  transform: initial;
+  pointer-events: initial;
+  opacity: 1;
+  z-index: 100;
+}
+
+@media (max-width: 720px) {
+  .info h1 {
+    font-size: 1.5rem;
+  }
+
+  .info p {
+    font-size: 0.8rem;
+  }
+
+  .navMobile ul li a {
+    font-size: 1rem;
+  }
+
+  .header ul li a {
+    font-size: 1rem;
+  }
 }

@@ -1,12 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import UseMedia from "../../Hooks/UseMedia";
 import styles from "../Header.module.css";
 
 const UserHeader = () => {
   const [title, setTitle] = React.useState("");
   const [subtitle, setSubtitle] = React.useState("");
   const { pathname } = useLocation();
+
+  const mobile = UseMedia("(max-width: 40rem)");
+  const [mobileMenu, setMobileMenu] = React.useState(false);
 
   React.useEffect(() => {
     switch (pathname) {
@@ -30,27 +34,42 @@ const UserHeader = () => {
         setTitle("DETALHES DO PET");
         setSubtitle("Veja aqui os detalhes do pet ");
     }
+    setMobileMenu(false);
   }, [pathname]);
 
   return (
-    <header className={styles.userHeader}>
-      <div className={`${styles.userHeaderContainer} container`}>
-        <div>
-          <h1>{title}</h1>
-          <p>{subtitle}</p>
+    <>
+      <header className={styles.userHeader}>
+        <div className={`${styles.userHeaderContainer} container`}>
+          <div className={styles.info}>
+            <h1>{title}</h1>
+            <p>{subtitle}</p>
+          </div>
+          {mobile && (
+            <button
+              className={`${styles.mobileButton} ${
+                mobileMenu && styles.mobileButtonActive
+              }`}
+              onClick={() => setMobileMenu(!mobileMenu)}
+            ></button>
+          )}
+          <nav
+            className={`${mobile ? styles.navMobile : styles.headerNav} ${
+              mobileMenu && styles.navMobileActive
+            }`}
+          >
+            <ul>
+              <li>
+                <Link to="/createpet">Cadastrar Pet</Link>
+              </li>
+              <li>
+                <Link to="/mypets">Ver meus pets</Link>
+              </li>
+            </ul>
+          </nav>
         </div>
-        <nav className={styles.headerNav}>
-          <ul>
-            <li>
-              <Link to="/createpet">Cadastrar Pet</Link>
-            </li>
-            <li>
-              <Link to="/mypets">Ver meus pets</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+      </header>
+    </>
   );
 };
 

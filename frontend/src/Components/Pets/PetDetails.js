@@ -46,7 +46,7 @@ const PetDetails = () => {
               <li>{pet.weight} kg</li>
               <li>{pet.description}</li>
             </ul>
-            <h1>Informações do reponsavel</h1>
+            <h1>Informações do responsavel</h1>
             <ul>
               <li>{pet.user.name}</li>
               <li>

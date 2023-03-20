@@ -1,9 +1,12 @@
 import React from "react";
+import UseCep from "../../Hooks/UseCep";
 import Button from "./Button";
 import Input from "./Input";
 
 const Userform = ({ data, handleSubmit, error, loading, btnText }) => {
   const [user, setUser] = React.useState(data || {});
+
+  const { handleCEP, address, city, district, state } = UseCep();
 
   const onChange = (e) => {
     setUser({ ...user, [e.target.id]: e.target.value });
@@ -11,6 +14,10 @@ const Userform = ({ data, handleSubmit, error, loading, btnText }) => {
 
   const submit = (e) => {
     e.preventDefault();
+    user.address = address;
+    user.city = city;
+    user.district = district;
+    user.state = state;
     handleSubmit(user);
   };
 
@@ -51,33 +58,28 @@ const Userform = ({ data, handleSubmit, error, loading, btnText }) => {
         type="number"
         onChange={onChange}
         value={user.cep || ""}
+        onBlur={(e) => handleCEP(e)}
       />
       <Input
         name="city"
         text="Cidade"
         type="text"
-        value={user.city || ""}
+        value={city || ""}
         readOnly
       />
-      <Input
-        name="state"
-        text="UF"
-        type="text"
-        value={user.state || ""}
-        readOnly
-      />
+      <Input name="state" text="UF" type="text" value={state || ""} readOnly />
       <Input
         name="district"
         text="Bairro"
         type="text"
-        value={user.district || ""}
+        value={district || ""}
         readOnly
       />
       <Input
         name="address"
         text="Rua"
         type="text"
-        value={user.address || ""}
+        value={address || ""}
         readOnly
       />
       {loading ? (

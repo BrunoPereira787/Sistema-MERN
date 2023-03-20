@@ -39,9 +39,9 @@ class PetController {
         phone: user.phone,
         cell: user.cell,
         image: user.image,
-        state: user.dataLocalization.state,
-        city: user.dataLocalization.city,
-        district: user.dataLocalization.district,
+        state: user.state,
+        city: user.city,
+        district: user.district,
       },
     };
 

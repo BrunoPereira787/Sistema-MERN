@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: 25rem 1fr;
   margin-top: 4rem;
+  margin-bottom: 4rem;
 }
 
 .userStatus {
@@ -73,4 +74,16 @@
 .buttons button:hover {
   background-color: #006be8;
   color: #fff;
+}
+
+@media (max-width: 800px) {
+  .userContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .userStatus {
+    max-width: 100%;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+  }
 }

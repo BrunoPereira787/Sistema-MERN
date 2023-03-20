@@ -70,3 +70,21 @@
   font-size: 1.125rem;
   color: #21832b;
 }
+
+@media (max-width: 900px) {
+  .petContainer {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .petContainer {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 400px) {
+  .petContainer {
+    grid-template-columns: 1fr;
+  }
+}

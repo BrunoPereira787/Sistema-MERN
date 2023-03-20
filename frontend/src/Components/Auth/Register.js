@@ -1,4 +1,5 @@
 import React from "react";
+import UseCep from "../../Hooks/UseCep";
 import useFetch from "../../Hooks/UseFetch";
 import useForm from "../../Hooks/UseForm";
 import { UserContext } from "../../UserContext";
@@ -8,6 +9,7 @@ import styles from "./Register.module.css";
 
 const Register = () => {
   const { request, loading, error } = useFetch();
+  const { handleCEP, address, city, district, state } = UseCep();
   const { userLogin } = React.useContext(UserContext);
 
   const name = useForm();
@@ -18,27 +20,23 @@ const Register = () => {
   const cell = useForm("phone");
   const cep = useForm();
 
-  const [city, setCity] = React.useState("");
-  const [state, setState] = React.useState("");
-  const [district, setDistrict] = React.useState("");
-  const [address, setAddress] = React.useState("");
-
-  const user = {
-    name: name.value,
-    email: email.value,
-    password: password.value,
-    confirmpassword: confirmpassword.value,
-    phone: phone.value,
-    cell: cell.value,
-    cep: cep.value,
-    city,
-    state,
-    district,
-    address,
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const user = {
+      name: name.value,
+      email: email.value,
+      password: password.value,
+      confirmpassword: confirmpassword.value,
+      phone: phone.value,
+      cell: cell.value,
+      cep: cep.value,
+      city,
+      state,
+      district,
+      address,
+    };
+
     const { response } = await request("http://localhost:5000/users/register", {
       method: "POST",
       headers: {
@@ -48,25 +46,6 @@ const Register = () => {
     });
     if (response.ok)
       userLogin({ email: email.value, password: password.value });
-  };
-
-  const handleCEP = async (e) => {
-    if (!e.target.value) {
-      setCity("");
-      setState("");
-      setDistrict("");
-      setAddress("");
-    }
-    const cep = e.target.value.replace(/\D/g, "");
-    const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-    const data = await response.json();
-    if (data.erro) {
-      return null;
-    }
-    setCity(data.localidade);
-    setState(data.uf);
-    setDistrict(data.bairro);
-    setAddress(data.logradouro);
   };
 
   return (
@@ -99,7 +78,7 @@ const Register = () => {
               value={cep.value}
               onChange={cep.onChange}
               error={cep.error}
-              onBlur={handleCEP}
+              onBlur={(e) => handleCEP(e)}
             />
             <Input
               name="city"
