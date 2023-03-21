@@ -10,7 +10,6 @@ router.post(
   imageUpload.array("images"),
   PetController.create
 );
-router.get("/pets", verifyToken, PetController.petsUF);
 router.get("/mypets", verifyToken, PetController.getUserPets);
 router.get("/pet/:id", PetController.getUserPetById);
 router.delete("/deletepet/:id", verifyToken, PetController.deletePetById);

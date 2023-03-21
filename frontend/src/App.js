@@ -11,6 +11,8 @@ import MyPets from "./Components/Pets/MyPets";
 import PetEdit from "./Components/Pets/PetEdit";
 import PetDetails from "./Components/Pets/PetDetails";
 import User from "./Components/User/User";
+import ProtectedRoute from "./Components/Helper/ProtectedRoute";
+import ProtectdRouteLogin from "./Components/Helper/ProtectdRouteLogin";
 
 function App() {
   return (
@@ -19,14 +21,68 @@ function App() {
         <UserStorage>
           <Header />
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/createpet" element={<CreatePet />} />
-            <Route path="/mypets" element={<MyPets />} />
-            <Route path="/petdetails/:id" element={<PetDetails />} />
-            <Route path="/pet/:id" element={<PetEdit />} />
-            <Route path="/perfil" element={<User />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route
+              path="/"
+              element={
+              <Home />
+              }
+            />
+            <Route
+              path="/createpet"
+              element={
+                <ProtectedRoute>
+                  <CreatePet />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/mypets"
+              element={
+                <ProtectedRoute>
+                  <MyPets />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/petdetails/:id"
+              element={
+                <ProtectedRoute>
+                  <PetDetails />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/pet/:id"
+              element={
+                <ProtectedRoute>
+                  <PetEdit />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/perfil"
+              element={
+                <ProtectedRoute>
+                  <User />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <ProtectdRouteLogin>
+                  <Login />
+                </ProtectdRouteLogin>
+              }
+            />
+            <Route
+              path="/register"
+              element={
+                <ProtectdRouteLogin>
+                  <Register />
+                </ProtectdRouteLogin>
+              }
+            />
           </Routes>
         </UserStorage>
       </BrowserRouter>

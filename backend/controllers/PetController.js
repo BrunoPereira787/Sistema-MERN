@@ -69,21 +69,6 @@ class PetController {
     }
   }
 
-  static async petsUF(req, res) {
-    const token = getToken(req);
-    const user = await getUserByToken(token);
-
-    try {
-      // busacando pet onde o state dentro de PET seja igual ao state do usuario cadastrado
-      const pets = await Pet.find({ "user.state": user.state }).sort(
-        "-createdAt"
-      );
-      res.status(200).json({ pets });
-    } catch (error) {
-      return res.status(500).json({ message: error });
-    }
-  }
-
   static async getUserPets(req, res) {
     const token = getToken(req);
     const user = await getUserByToken(token);
@@ -116,20 +101,6 @@ class PetController {
       return res.status(500).json({ message: error });
     }
   }
-
-  /*static async getUserPetsAdoptions(req, res) {
-    const token = getToken(req);
-    const user = await getUserByToken(token);
-
-    try {
-      const pets = await Pet.find({ "adopter._id": user._id }).sort(
-        "-createdAt"
-      );
-      res.status(200).json({ pets });
-    } catch (error) {
-      return res.status(500).json({ message: error });
-    }
-  }*/
 
   static async deletePetById(req, res) {
     const { id } = req.params;
@@ -205,11 +176,6 @@ class PetController {
     }
     updatePet.weight = weight;
 
-    /*if (!available) {
-      return res.status(422).json({ message: "O status é obrigatorio" });
-    }
-    updatePet.available = available;*/
-
     if (description) {
       updatePet.description = description;
     }
@@ -228,57 +194,6 @@ class PetController {
       return res.status(500).json({ message: error });
     }
   }
-
-  /*static async brandVisit(req, res) {
-    const { id } = req.params;
-
-    const token = getToken(req);
-    const user = await getUserByToken(token);
-
-    if (!ObjectId.isValid(id)) {
-      return res.status(422).json({ message: "ID inválido" });
-    }
-
-    const pet = await Pet.findOne({ _id: id });
-
-    if (!pet) {
-      res.status(404).json({ message: "Pet não encontrado" });
-      return;
-    }
-
-    if (pet.user._id.toString() === user._id.toString()) {
-      return res.status(422).json({
-        message: "Voce não pode agendar uma visita com seu proprio pet",
-      });
-    }
-
-    if (pet.adopter) {
-      if (pet.adopter._id.toString() === user._id.toString()) {
-        return res
-          .status(422)
-          .json({ message: "Voce ja agendou uma visita para esse pet" });
-      }
-    }
-    pet.adopter = {
-      name: user.name,
-      _id: user._id,
-      phone: user.phone,
-      cell: user.cell,
-      state: user.state,
-      state: user.dataLocalization.state,
-      city: user.dataLocalization.city,
-      district: user.dataLocalization.district,
-    };
-
-    try {
-      await Pet.findByIdAndUpdate(id, pet);
-      res.status(200).json({
-        message: `A visita foi agendada com sucesso, entre em contato com ${pet.user.name} pelo telefone ${pet.user.phone}`,
-      });
-    } catch (error) {
-      return res.status(500).json({ message: error });
-    }
-  }*/
 
   static async concludeAdoption(req, res) {
     const { id } = req.params;

@@ -111,6 +111,7 @@ class UserController {
     }
   }
 
+  // adm
   static async getAllUsers(req, res) {
     const user = await User.find();
 
@@ -127,6 +128,7 @@ class UserController {
     }
   }
 
+  // adm
   static async getUserById(req, res) {
     const id = req.params.id;
 
