@@ -145,18 +145,19 @@ class UserController {
   }
 
   static async getUserByToken(req, res) {
-    let user;
-    if (req.headers.authorization) {
-      const token = getToken(req);
-      const decoded = jwt.verify(token, process.env.SECRET_JWT);
-      user = await User.findById(decoded.id);
-
-      user.password = undefined;
-    } else {
-      user = null;
-    }
     try {
-      res.status(200).send(user);
+      if (req.headers.authorization) {
+        const token = getToken(req);
+        jwt.verify(token, process.env.SECRET_JWT, async (error, decoded) => {
+          if (error) {
+            return res.status(404).json({ message: "error" });
+          }
+          const user = await User.findById(decoded.id);
+
+          user.password = undefined;
+          res.status(200).send(user);
+        });
+      }
     } catch (error) {
       res.status(500).json({ message: error });
     }
