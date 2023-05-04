@@ -4,6 +4,7 @@ import UseForm from "../../Hooks/UseForm";
 import Input from "../Forms/Input";
 import styles from "./Login.module.css";
 import Button from "../Forms/Button";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const email = UseForm("email");
@@ -29,7 +30,10 @@ const Login = () => {
           <Button>Entrar</Button>
         )}
         {error && <p className="error">{error}</p>}
-        <p>não tem conta ainda ? Clique aqui e se cadastre</p>
+        <p>
+          não tem conta ainda ? <Link to="/register">Clique aqui</Link> e se
+          cadastre
+        </p>
       </form>
     </section>
   );

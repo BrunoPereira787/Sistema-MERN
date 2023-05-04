@@ -4,6 +4,7 @@ import { UserContext } from "../../UserContext";
 import Loading from "../Helper/Loading";
 import ModalUser from "./ModalUser";
 import styles from "./User.module.css";
+import { DELETE_USER, GET_USER } from "../../Api";
 
 const User = () => {
   const { data, loading, request } = UseFetch();
@@ -11,14 +12,10 @@ const User = () => {
   const [userModal, setUserModal] = React.useState(null);
 
   React.useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    const { url, options } = GET_USER(token);
     const loadApi = async () => {
-      const token = window.localStorage.getItem("token");
-      await request("http://localhost:5000/users/user", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await request(url, options);
     };
     loadApi();
   }, [request]);
@@ -29,12 +26,8 @@ const User = () => {
     );
     if (confirm) {
       const token = window.localStorage.getItem("token");
-      const { response } = await request("http://localhost:5000/users/delete", {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const { url, options } = DELETE_USER(token);
+      const { response } = await request(url, options);
       if (response.ok) userLogout();
     }
   };

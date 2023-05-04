@@ -2,6 +2,7 @@ import React from "react";
 import useFetch from "../../Hooks/UseFetch";
 import { useNavigate } from "react-router-dom";
 import PetForm from "../Forms/PetForm";
+import { POST_PET } from "../../Api";
 
 const CreatePet = () => {
   const { error, loading, request } = useFetch();
@@ -21,16 +22,11 @@ const CreatePet = () => {
     formData.append("weight", pet.weight || "");
     formData.append("age", pet.age || "");
     formData.append("description", pet.description || "");
-    console.log(formData.get("name"));
-    const token = window.localStorage.getItem("token");
 
-    const { json } = await request("http://localhost:5000/pets/create", {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-      body: formData,
-    });
+    const token = window.localStorage.getItem("token");
+    const { url, options } = POST_PET(token, formData);
+
+    const { json } = await request(url, options);
 
     if (json) {
       navigate("/");

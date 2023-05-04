@@ -2,6 +2,7 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import useFetch from "../../Hooks/UseFetch";
 import PetForm from "../Forms/PetForm";
+import { UPDATE_PET } from "../../Api";
 
 const PetEdit = () => {
   const { error, loading, request } = useFetch();
@@ -38,17 +39,9 @@ const PetEdit = () => {
     formData.append("description", pet.description);
 
     const token = window.localStorage.getItem("token");
+    const { url, options } = UPDATE_PET(id, token, formData);
 
-    const { json } = await request(
-      `http://localhost:5000/pets/updatepet/${id}`,
-      {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      }
-    );
+    const { json } = await request(url, options);
 
     if (json) {
       navigate("/mypets");

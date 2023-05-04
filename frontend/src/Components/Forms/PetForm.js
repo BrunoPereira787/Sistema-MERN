@@ -25,21 +25,16 @@ const PetForm = ({ handleSubmit, loading, petData, error, btnText }) => {
     <form onSubmit={submit} className={styles.formContainer}>
       {preview
         ? preview.map((image, index) => (
-            <div className={styles.formPreview}>
-              <img
-                src={URL.createObjectURL(image)}
-                alt={pet.name}
-                key={`${pet.name}+${index}`}
-              />
+            <div key={index} className={styles.formPreview}>
+              <img src={URL.createObjectURL(image)} alt={pet.name} />
             </div>
           ))
         : pet.images &&
           pet.images.map((image, index) => (
-            <div className={styles.formPreview}>
+            <div key={index} className={styles.formPreview}>
               <img
                 src={`http://localhost:5000/images/pets/${image}`}
                 alt={pet.name}
-                key={`${pet.name}+${index}`}
               />
             </div>
           ))}

@@ -6,6 +6,7 @@ import { UserContext } from "../../UserContext";
 import Button from "../Forms/Button";
 import Input from "../Forms/Input";
 import styles from "./Register.module.css";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const { request, loading, error } = useFetch();
@@ -110,7 +111,9 @@ const Register = () => {
               <Button>Registrar</Button>
             )}
             {error && <p className="error">{error}</p>}
-            <p>Ja tem conta ? Clique aqui e faça login</p>
+            <p>
+              Ja tem conta ? <Link to="/login">Clique aqui</Link> e faça login
+            </p>
           </div>
         </form>
       </div>

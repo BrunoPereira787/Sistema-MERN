@@ -34,6 +34,10 @@
   margin-top: 1rem;
 }
 
+.register p a {
+  color: #006be8;
+}
+
 @media (max-width: 720px) {
   .registerForm {
     grid-template-columns: 1fr;

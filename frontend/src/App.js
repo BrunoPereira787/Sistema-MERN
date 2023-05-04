@@ -21,12 +21,7 @@ function App() {
         <UserStorage>
           <Header />
           <Routes>
-            <Route
-              path="/"
-              element={
-              <Home />
-              }
-            />
+            <Route path="/" element={<Home />} />
             <Route
               path="/createpet"
               element={
@@ -43,14 +38,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="/petdetails/:id"
-              element={
-                <ProtectedRoute>
-                  <PetDetails />
-                </ProtectedRoute>
-              }
-            />
+            <Route path="/petdetails/:id" element={<PetDetails />} />
             <Route
               path="/pet/:id"
               element={

@@ -2,6 +2,7 @@ import React from "react";
 import useFetch from "../../Hooks/UseFetch";
 import Userform from "../Forms/Userform";
 import styles from "./ModalUser.module.css";
+import { UPDATE_USER } from "../../Api";
 
 const ModalUser = ({ user, setUserModal }) => {
   const { error, loading, request } = useFetch();
@@ -12,14 +13,8 @@ const ModalUser = ({ user, setUserModal }) => {
 
   const handleSubmit = async (data) => {
     const token = window.localStorage.getItem("token");
-    const { response } = await request("http://localhost:5000/users/edit", {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+    const { url, options } = UPDATE_USER(token, data);
+    const { response } = await request(url, options);
 
     if (response.ok) window.location.reload();
   };

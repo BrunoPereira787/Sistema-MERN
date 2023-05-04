@@ -26,6 +26,10 @@
   margin-top: 1rem;
 }
 
+.form p a {
+  color: #006be8;
+}
+
 @media (max-width: 650px) {
   .login {
     grid-template-columns: 1fr;
